@@ -76,6 +76,9 @@
 % getStateInfo('Oxford', State, 45056). -> State = 'OH'
 % findall(State, getStateInfo('Oxford', State, _), StList), writeln(StList).
 % -> StList = [AL,AR,CT,FL,GA,GA,IA,IN,KS,MA,MD,ME,MI,MI,MS,NC,NE,NJ,NY,OH,PA,WI]
+
+getStateInfo(Place, State, Zipcode) :- location(Zipcode, Place, State, _, _, _).
+
 % ------------------------------------------------
 % #9 (Undergrad/Grad) (17/7 pts)
 % Gets place names that are common between STATE1 and STATE2, 
