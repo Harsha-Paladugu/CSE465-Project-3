@@ -112,6 +112,16 @@ getStateInfo(Place, State, Zipcode) :- location(Zipcode, Place, State, _, _, _).
 % inton','Hudson','Akron','Fowler','Hartford','Niles','Warren','Du
 % ndee','Marysville','Ray','Franklin','Mason','Lowell','Newport',
 % 'Waterford', 'Sterling', 'Portage', 'Wayne', 'Grand Rapids', 'Weston']
+
+
+getCommon(STATE1, STATE2, PLACELST) :-
+    not(STATE1 = STATE2),
+    findall(Place,
+            ( getStateInfo(Place, STATE1, _),
+              getStateInfo(Place, STATE2, _) ),
+            Dups),
+    sort(Dups, PLACELST).
+
 % ------------------------------------------------
 % #10 (Undergrad/Grad) (20/15 pts)
 % Determine the place that is geographically closest to a given place 
