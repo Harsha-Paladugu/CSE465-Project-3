@@ -25,7 +25,7 @@ max_two(A, B, M) :- A < B, M = B.
 % count_occurrences(Lst, Num, Count).
 count_occurrences([], _, 0).
 count_occurrences([H|T], Num, Count) :- H =:= Num, count_occurrences(T, Num, C), Count is C + 1.
-count_occurrences([H|T], Num, Count) :- H =/= Num, count_occurrences(T, Num, Count).
+count_occurrences([H|T], Num, Count) :- H =\= Num, count_occurrences(T, Num, Count).
 
 % count_occurrences([1, 2, 3, 2, 2, 4], 2, Count). -> Count = 3
 % count_occurrences([5, 5, 5], 5, Count). -> Count = 3
