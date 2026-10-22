@@ -5,6 +5,8 @@
 % #1 (Undergraduate/Graduate) (5/5 pts)
 % Determine the maximum of two integer numbers.
 % max_two(A, B, M).
+max_two(A, B, M) :- A >= B, M = A.
+max_two(A, B, M) :- A < B, M = B.
 
 % max_two(1, 12, M). -> M = 12
 % max_two(11232, 92674, M). -> M = 92674
