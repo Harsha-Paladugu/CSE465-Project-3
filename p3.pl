@@ -155,3 +155,22 @@ distance_km(Lat1, Lon1, Lat2, Lon2, D) :-
 
 deg2rad(Deg, Rad) :-
     Rad is Deg * pi / 180.
+
+
+closestPlaceInState(Place, State, ClosestPlace) :-
+    findall([Other, D],
+            ( location(_, Place, State, _, Lat1, Lon1),
+              location(_, Other, State, _, Lat2, Lon2),
+              not(Other = Place),
+              distance_km(Lat1, Lon1, Lat2, Lon2, D) ),
+            Candidates),
+    closest(Candidates, ClosestPlace, _).
+
+closest([[P, D]], P, D).
+closest([[P1, D1], [P2, D2] | T], P, D) :-
+    closest([[P2, D2] | T], PRest, DRest),
+    closer(P1, D1, PRest, DRest, P, D).
+
+closer(P1, D1, _, D2, P1, D1) :- D1 =< D2.
+closer(_, D1, P2, D2, P2, D2) :- D1 > D2.
+
