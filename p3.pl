@@ -16,6 +16,8 @@ max_two(A, B, M) :- A < B, M = B.
 % determine the maximum value in a list of integers
 % (the list will always have length >= 1).
 % max_lst(Lst, Max).
+max_lst([X], X).
+max_lst([H, N|T], Max) :- max_lst([N|T], MaxLeft), max_two(H, MaxLeft, Max).
 
 % max_lst([1, 2, 3, 4], Max). -> Max = 4
 % max_lst([1, 13, 2], Max). -> Max = 13
@@ -24,8 +26,8 @@ max_two(A, B, M) :- A < B, M = B.
 % Count how many times a number appears in a list of integers.
 % count_occurrences(Lst, Num, Count).
 count_occurrences([], _, 0).
-count_occurrences([H|T], Num, Count) :- H =:= Num, count_occurrences(T, Num, C), Count is C + 1.
-count_occurrences([H|T], Num, Count) :- H =\= Num, count_occurrences(T, Num, Count).
+count_occurrences([H|T], Num, Count) :- H == Num, count_occurrences(T, Num, C), Count is C + 1.
+count_occurrences([H|T], Num, Count) :- not(H == Num), count_occurrences(T, Num, Count).
 
 % count_occurrences([1, 2, 3, 2, 2, 4], 2, Count). -> Count = 3
 % count_occurrences([5, 5, 5], 5, Count). -> Count = 3
