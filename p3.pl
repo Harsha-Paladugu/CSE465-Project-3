@@ -53,6 +53,11 @@ count_occurrences([H|T], Num, Count) :- not(H == Num), count_occurrences(T, Num,
 % Using the count_occurrences predicate from Problem 3,
 % determine the reversed list of integers without duplicate values.
 % reverse_unique(Lst, RevLst).
+reverse_unique([], []).
+reverse_unique([H|T], RevLst) :-
+    reverse_unique(T, R),
+    count_occurrences(R, H, Count),
+    (Count > 0 -> RevLst = R ; RevLst = [H|R]).
 
 % reverse_unique([4, 0, -4, 6, 0], RevLst). -> RevLst = [0, 6, -4, 4]
 % reverse_unique([6, 18, 41, 6, 18, 10, 6], RevLst). -> RevLst = [6, 10, 18, 41]
@@ -60,6 +65,18 @@ count_occurrences([H|T], Num, Count) :- not(H == Num), count_occurrences(T, Num,
 % #7 (Undergraduate/Graduate) (10/5 pts)
 % Return a list of numbers that have an even number of digits.
 % collectEvenDigitCount(Lst, NewLst).
+collectEvenDigitCount([], []).
+collectEvenDigitCount([H|T], NewLst) :-
+    numbers(H, Digits),
+    collectEvenDigitCount(T, R),
+    (0 is Digits mod 2 -> NewLst = [H|R] ; NewLst = R).
+numbers(N, 1) :-
+    abs(N) < 10.
+numbers(N, Digits) :-
+    abs(N) >= 10,
+    Num is abs(N) // 10,
+    numbers(Num, D),
+    Digits is D + 1.
 
 % collectEvenDigitCount([3, 12, 9999, 123], NewLst). -> NewLst = [12, 9999] 
 % collectEvenDigitCount([22, 3333, 0, 444444], NewLst). -> NewLst = [22, 3333, 444444] 
