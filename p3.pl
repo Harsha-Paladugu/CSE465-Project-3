@@ -36,6 +36,14 @@ count_occurrences([H|T], Num, Count) :- not(H == Num), count_occurrences(T, Num,
 % Determine the summation of a list of integer numbers.
 % sum_lst(Lst, Sum).
 
+% Base case: The sum of an empty list is 0.
+sum_lst([], 0).
+
+% Recursive case: Add the first number to the sum of the rest.
+sum_lst([H|T], Sum) :-
+    sum_lst(T, RestSum),
+    Sum is H + RestSum.
+    
 % sum_lst([1, 2, 3, 4], Sum). -> Sum = 10
 % sum_lst([10, 10], Sum). -> Sum = 20
 % ------------------------------------------------
@@ -45,6 +53,15 @@ count_occurrences([H|T], Num, Count) :- not(H == Num), count_occurrences(T, Num,
 % whose sums are equal
 % (the list will always have length >= 1).
 % partitionable(Lst).
+
+% Check whether a list can be split into two equal-sum sublists.
+partitionable(Lst) :-
+    append(Part1, Part2, Lst),
+    Part1 \= [],
+    Part2 \= [],
+    sum_lst(Part1, Sum1),
+    sum_lst(Part2, Sum2),
+    Sum1 =:= Sum2.
  
 % partitionable([1, 2, 3, 4, 10]). -> true. because of [1, 2, 3, 4] and [10]
 % partitionable([2, 1, 1]). -> true. because of [2] and [1, 2]
