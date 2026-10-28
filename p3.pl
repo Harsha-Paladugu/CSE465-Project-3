@@ -1,5 +1,9 @@
 % p3.pl
-% *-> ADD ALL RESPONSIBILITIES IN DETAIL HERE <-*
+% Responsibilities:
+%   Evan Bailey     - Problems 1, 2, 3
+%   My'Annia Lewis  - Problems 4, 5
+%   Jorge Bolanos   - Problems 6, 7
+%   Harsha Paladugu - Problems 8, 9, 10
 
 % ------------------- PART ONE ---------------------
 % #1 (Undergraduate/Graduate) (5/5 pts)
@@ -74,7 +78,7 @@ reverse_unique([], []).
 reverse_unique([H|T], RevLst) :-
     reverse_unique(T, R),
     count_occurrences(R, H, Count),
-    (Count > 0 -> RevLst = R ; RevLst = [H|R]).
+    (Count > 0 -> RevLst = R ; append(R, [H], RevLst)).
 
 % reverse_unique([4, 0, -4, 6, 0], RevLst). -> RevLst = [0, 6, -4, 4]
 % reverse_unique([6, 18, 41, 6, 18, 10, 6], RevLst). -> RevLst = [6, 10, 18, 41]
